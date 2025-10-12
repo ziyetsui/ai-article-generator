@@ -11,11 +11,11 @@
   # Directory where the serverless functions are located
   functions = "api"
 
-# Settings for serverless functions
-[functions]
-  # Set the timeout for all functions to the maximum allowed value.
-  # Note: Check Netlify's documentation for the current maximum timeout on your plan.
-  timeout = 300 # Set to 300 seconds (5 minutes) for background functions, or the max for sync functions
+# Increase the timeout for our specific API function.
+# The function is named 'index' because the file is 'api/index.js'.
+# We set it to 26 seconds, the maximum for synchronous functions on Pro plans.
+[functions.index]
+  timeout = 26
 
 # Redirects and rewrites rules are processed in the order they appear.
 

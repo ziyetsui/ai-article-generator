@@ -11,18 +11,12 @@
   # Directory where the serverless functions are located
   functions = "api"
 
-# Increase the timeout for our specific API function.
-# The function is named 'index' because the file is 'api/index.js'.
-# We set it to 26 seconds, the maximum for synchronous functions on Pro plans.
-[functions.index]
-  timeout = 26
-
 # Redirects and rewrites rules are processed in the order they appear.
 
 # Rule to proxy API requests to our serverless function
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/index"
+  to = "/.netlify/functions/index-background"
   status = 200 # This makes it a rewrite (proxy)
 
 # Rule for Single Page Application (SPA) routing

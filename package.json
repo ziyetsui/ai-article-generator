@@ -1,0 +1,29 @@
+{
+  "name": "ai-article-generator",
+  "version": "1.0.0",
+  "description": "AI-powered WeChat article generator with Liu Run writing style",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "cd frontend && npm install && npm run build",
+    "start": "vercel --prod"
+  },
+  "keywords": [
+    "ai",
+    "article",
+    "generator",
+    "wechat",
+    "deepseek"
+  ],
+  "author": "徐子叶",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
+

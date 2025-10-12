@@ -1,0 +1,23 @@
+# ========================================
+# Backend Environment Configuration
+# ========================================
+# Copy this file to .env and fill in your values
+
+# Gemini API Configuration
+# Get your API key from: https://makersuite.google.com/app/apikey
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# Server Configuration
+PORT=5000
+
+# WeChat API Configuration (Optional - for future implementation)
+# WECHAT_APP_ID=your_app_id
+# WECHAT_APP_SECRET=your_app_secret
+# WECHAT_ACCESS_TOKEN=your_access_token
+
+# CORS Configuration (Optional)
+# ALLOWED_ORIGINS=http://localhost:3000,https://your-frontend-domain.com
+
+# Node Environment
+# NODE_ENV=development
+

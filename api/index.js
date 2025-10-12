@@ -3,10 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
 
-// For local development, load .env from the backend directory
-if (process.env.NODE_ENV !== 'production') {
-  dotenv.config({ path: path.resolve(__dirname, '../backend/.env') });
-}
+dotenv.config({ path: path.resolve(__dirname, './.env') });
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -361,6 +358,9 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
 });
 
-// For Vercel serverless functions
-module.exports = app;
+// Start server
+app.listen(PORT, () => {
+  console.log(`Backend server running on http://localhost:${PORT}`);
+  console.log(`Using DeepSeek model: ${DEEPSEEK_MODEL_NAME}`);
+});
 

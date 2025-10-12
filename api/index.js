@@ -361,11 +361,6 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Backend server running on http://localhost:${PORT}`);
-  console.log(`Using DeepSeek model: ${DEEPSEEK_MODEL_NAME}`);
-});
-
+// For Vercel serverless functions
 module.exports = app;
 

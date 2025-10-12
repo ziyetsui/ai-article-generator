@@ -2,13 +2,20 @@
 
 一个基于 AI 的多页面公众号文章生成应用，模拟刘润老师的写作风格，帮助用户快速创作高质量的公众号文章。
 
+## 🚀 快速部署
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/your-repo)
+
+> 📖 **详细部署指南请查看：** [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md)
+
 ## ✨ 功能特性
 
 - 🎯 **灵感输入页面** - 输入零散的灵感或想法，AI 自动生成完整文章
 - 📝 **文章优化页面** - 提供标题生成、一键排版、一键发布等功能
-- 🤖 **AI 驱动** - 集成 Google Gemini API，模拟刘润写作风格
+- 🤖 **AI 驱动** - 集成 DeepSeek API，模拟刘润写作风格
 - 🎨 **现代化 UI** - 简洁优雅的界面设计，极致的用户体验
 - 📱 **响应式设计** - 完美适配桌面端和移动端
+- ☁️ **一键部署** - 支持 Vercel 一键部署，无需服务器
 
 ## 🛠 技术栈
 
@@ -20,7 +27,8 @@
 
 ### 后端
 - Node.js + Express
-- Google Generative AI (Gemini)
+- DeepSeek AI API
+- Vercel Serverless Functions
 - CORS
 - dotenv
 
@@ -53,7 +61,7 @@
 
 - Node.js >= 14.x
 - npm 或 yarn
-- Google Gemini API Key
+- DeepSeek API Key（[获取 API Key](https://platform.deepseek.com/api_keys)）
 
 ### 1. 克隆项目
 
@@ -73,14 +81,18 @@ npm install
 在 `backend` 目录下创建 `.env` 文件：
 
 ```env
-GEMINI_API_KEY=your_gemini_api_key_here
+DEEPSEEK_API_KEY=your_deepseek_api_key_here
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL_NAME=deepseek-chat
 PORT=5000
 ```
 
-**获取 Gemini API Key:**
-1. 访问 [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. 登录您的 Google 账号
+**获取 DeepSeek API Key:**
+1. 访问 [DeepSeek Platform](https://platform.deepseek.com/api_keys)
+2. 登录或注册账号
 3. 创建并复制 API Key
+
+> 💡 **提示：** 您也可以参考 `backend/env-template.txt` 文件来配置环境变量
 
 ### 4. 启动后端服务
 
@@ -189,11 +201,13 @@ Content-Type: application/json
 ### 环境变量
 
 **后端 (.env):**
-- `GEMINI_API_KEY` - Google Gemini API 密钥（必需）
+- `DEEPSEEK_API_KEY` - DeepSeek API 密钥（必需）
+- `DEEPSEEK_BASE_URL` - DeepSeek API 基础URL（默认：https://api.deepseek.com）
+- `DEEPSEEK_MODEL_NAME` - 使用的模型名称（默认：deepseek-chat）
 - `PORT` - 后端服务端口（默认：5000）
 
 **前端 (.env):**
-- `REACT_APP_API_URL` - 后端 API 地址（默认：http://localhost:5000）
+- `REACT_APP_API_URL` - 后端 API 地址（默认：生产环境使用相对路径，开发环境使用 http://localhost:5001）
 
 ### 自定义配置
 
@@ -228,10 +242,45 @@ npm run build
 
 构建产物将生成在 `frontend/build` 目录
 
-### 部署建议
+### 部署到生产环境
+
+#### 🚀 推荐方式：Vercel（一键部署）
+
+本项目已针对 Vercel 进行优化，可以一键部署：
+
+**方法 1：使用 Vercel CLI（推荐）**
+
+```bash
+# 安装 Vercel CLI
+npm install -g vercel
+
+# 登录 Vercel
+vercel login
+
+# 部署项目
+vercel --prod
+```
+
+**方法 2：使用部署脚本**
+
+```bash
+# 运行部署脚本
+./deploy.sh
+```
+
+**方法 3：使用 Vercel Dashboard**
+
+1. 访问 [Vercel Dashboard](https://vercel.com/dashboard)
+2. 导入 Git 仓库
+3. 配置环境变量（`DEEPSEEK_API_KEY` 等）
+4. 点击 Deploy
+
+> 📖 **详细部署说明请查看：** [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md)
+
+#### 其他部署方式
 
 1. **后端部署** - 可使用 PM2、Docker 或云服务（如 Heroku、Railway）
-2. **前端部署** - 可使用 Vercel、Netlify 或 Nginx
+2. **前端部署** - 可使用 Netlify 或 Nginx
 3. **环境变量** - 确保在生产环境中正确配置所有环境变量
 4. **CORS** - 在生产环境中配置正确的 CORS 策略
 
@@ -260,4 +309,7 @@ ISC License
 ---
 
 **祝您使用愉快！如有问题，请随时提出 Issue。**
+
+
+
 

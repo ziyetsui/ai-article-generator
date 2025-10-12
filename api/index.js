@@ -1,3 +1,4 @@
+const serverless = require('serverless-http');
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -358,9 +359,8 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Backend server running on http://localhost:${PORT}`);
-  console.log(`Using DeepSeek model: ${DEEPSEEK_MODEL_NAME}`);
-});
+// The app.listen() block has been removed as it's not needed for serverless execution.
+
+// Export the handler for Netlify/AWS Lambda
+module.exports.handler = serverless(app);
 

@@ -8,6 +8,16 @@ export interface GenerateArticleResponse {
   message?: string;
 }
 
+export interface SubmitJobResponse {
+  jobId: string;
+}
+
+export interface JobStatusResponse {
+  status: 'pending' | 'completed' | 'failed';
+  article?: string;
+  error?: string;
+}
+
 export interface GenerateTitlesResponse {
   status: string;
   titles: string[];
@@ -28,8 +38,8 @@ export interface PublishResponse {
 }
 
 export const api = {
-  async generateArticle(inspiration: string): Promise<GenerateArticleResponse> {
-    const response = await fetch(`${API_BASE_URL}/api/generate/article`, {
+  async submitJob(inspiration: string): Promise<SubmitJobResponse> {
+    const response = await fetch(`${API_BASE_URL}/api/submit-job`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,10 +48,19 @@ export const api = {
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || '生成文章失败');
+      const errorData = await response.json().catch(() => ({ message: '开启文章生成任务失败' }));
+      throw new Error(errorData.message);
     }
 
+    return response.json();
+  },
+
+  async checkStatus(jobId: string): Promise<JobStatusResponse> {
+    const response = await fetch(`${API_BASE_URL}/api/check-status?jobId=${jobId}`);
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({ message: '获取文章状态失败' }));
+      throw new Error(errorData.message);
+    }
     return response.json();
   },
 

@@ -9,7 +9,7 @@ export default async (req, context) => {
     if (!inspiration) {
       return new Response(JSON.stringify({ message: "请提供灵感内容" }), {
         status: 400,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json; charset=utf-8" },
       });
     }
 
@@ -31,13 +31,13 @@ export default async (req, context) => {
     // Immediately return the job ID
     return new Response(JSON.stringify({ jobId }), {
       status: 202, // Accepted
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json; charset=utf-8" },
     });
   } catch (error) {
     console.error("Error submitting job:", error);
     return new Response(JSON.stringify({ message: "开启任务失败" }), {
       status: 500,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json; charset=utf-8" },
     });
   }
 };
